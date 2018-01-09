@@ -1,4 +1,5 @@
 com/turgul/kemal/exceptions/StartDateException.class
+com/turgul/kemal/exceptions/ExtraArgumentException.class
 com/turgul/kemal/enums/Duration.class
 com/turgul/kemal/dao/ServerAccessBlockedDao.class
 com/turgul/kemal/dao/ServerAccessLogDao.class

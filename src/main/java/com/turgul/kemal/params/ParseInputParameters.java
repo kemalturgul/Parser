@@ -40,28 +40,28 @@ public class ParseInputParameters {
 	public InputParameters parseInputParams(String... inputs) throws MissingArgumentException, FilePathException,
 			StartDateException, DurationException, ThresholdException, ExtraArgumentException {
 
+		//Split by = sign and prepare key-value pair
+		splitInputParamsAsKeyValue(inputs);
 		if (inputs.length == 4) {
 
-			splitInputParamsAsKeyValue(inputs);
 			checkInputParametersNames(true);
-
 			parseLogFilePath();
 			parseSearchParameters();
 
 		} else if (inputs.length == 3) {
 
-			splitInputParamsAsKeyValue(inputs);
 			checkInputParametersNames(false);
-
 			parseSearchParameters();
-
+			
+		} else if (inputs.length == 1) {
+			
+			checkForHelp();
+			
 		} else if (inputs.length > 4) {
 			throw new ExtraArgumentException("Extra arguments entered, please check usage!!");
 		} else {
 			throw new MissingArgumentException("Missing arguments, please check usage!!");
 		}
-
-		System.out.println("parsed input arguments:" + inputParametersValidation.getInputParameters());
 
 		return inputParametersValidation.getInputParameters();
 	}
@@ -77,6 +77,14 @@ public class ParseInputParameters {
 		}
 	}
 
+	private void checkForHelp() throws MissingArgumentException {
+		if (inputParamsAndValues.containsKey(Constants.INPUT_PARAMETER_HELP_TXT)) {
+			inputParametersValidation.getInputParameters().setHelp(true);
+		} else {
+			throw new MissingArgumentException("Missing arguments, please check usage!!");
+		}
+	}
+	
 	private void checkInputParametersNames(boolean checkLogFilePath)
 			throws FilePathException, StartDateException, DurationException, ThresholdException {
 
@@ -100,8 +108,7 @@ public class ParseInputParameters {
 	}
 
 	private void parseLogFilePath() throws FilePathException {
-		inputParametersValidation
-				.validatePathToFile(inputParamsAndValues.get(Constants.INPUT_PARAMETER_ACCESS_LOG_TXT));
+		inputParametersValidation.validatePathToFile(inputParamsAndValues.get(Constants.INPUT_PARAMETER_ACCESS_LOG_TXT));
 	}
 
 	private void parseSearchParameters() throws StartDateException, DurationException, ThresholdException {

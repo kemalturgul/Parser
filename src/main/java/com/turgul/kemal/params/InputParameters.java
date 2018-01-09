@@ -20,6 +20,7 @@ public class InputParameters {
 	Date endDate;
 	Duration duration;
 	int threshold;
+	boolean help;
 
 	public InputParameters() {
 	}
@@ -86,6 +87,14 @@ public class InputParameters {
 
 	public void setThreshold(int threshold) {
 		this.threshold = threshold;
+	}
+
+	public boolean isHelp() {
+		return help;
+	}
+
+	public void setHelp(boolean help) {
+		this.help = help;
 	}
 
 	public String getBlockingComment() {

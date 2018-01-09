@@ -3,7 +3,6 @@ package com.turgul.kemal.search;
 import java.util.Date;
 import java.util.List;
 
-import com.turgul.kemal.Constants;
 import com.turgul.kemal.dao.DaoFactory;
 import com.turgul.kemal.dao.ServerAccessBlockedDao;
 import com.turgul.kemal.dao.ServerAccessLogDao;
@@ -32,7 +31,7 @@ public class SearchServerAccessLog {
 			serverAccessLogDao = daoFactory.getServerAccessLogDao();
 
 			prepareEndDate();
-			
+
 			List<Object[]> searchResultList = serverAccessLogDao.searchByDateAndThreshold(
 					inputParameters.getStartDate(), inputParameters.getEndDate(), inputParameters.getThreshold());
 
@@ -45,7 +44,8 @@ public class SearchServerAccessLog {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("An Excepton occurred while searching in DB for given parameters:" + inputParameters.toString());
+			System.out.println("Error Message:" + e.getMessage());
 		} finally {
 			if (daoFactory != null) {
 				daoFactory.closeContext();
@@ -61,14 +61,16 @@ public class SearchServerAccessLog {
 			// } else if (Duration.DAILY == inputParameters.getDuration()) {
 			// endDate = DateUtil.dateAddOneDay(inputParameters.getStartDate());
 		} else {
+			// Default add daily
 			endDate = DateUtil.dateAddOneDay(inputParameters.getStartDate());
 		}
 		inputParameters.setEndDate(endDate);
 	}
 
 	private void printToConsole(List<Object[]> serverAccessData) {
+		System.out.println("----------------SEARCH RESULTS------------------");
 		for (Object[] accessData : serverAccessData) {
-			System.out.println(String.format("Ip:%s requests:%s", accessData[0], accessData[1]));
+			System.out.println(String.format("IpAddress:%s accessCount:%s", accessData[0], accessData[1]));
 		}
 	}
 
@@ -77,17 +79,17 @@ public class SearchServerAccessLog {
 		try {
 			daoFactory = DaoFactory.getInstance();
 			ServerAccessBlockedDao serverAccessBlockedDao = daoFactory.getServerAccessBlockedDao();
-			
+
 			for (Object[] accessData : serverAccessData) {
 				ServerAccessBlocked serverAccessBlocked = new ServerAccessBlocked((String) accessData[0],
 						inputParameters.getStartDate(), inputParameters.getDuration(), inputParameters.getThreshold(),
 						new Date(), inputParameters.getBlockingComment());
 
 				serverAccessBlockedDao.save(serverAccessBlocked);
-
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("An Excepton occurred while saving serverAccessData:" + serverAccessData);
+			System.out.println("Error Message:" + e.getMessage());
 		} finally {
 			if (daoFactory != null) {
 				daoFactory.closeContext();

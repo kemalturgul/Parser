@@ -30,8 +30,6 @@ public class ParserTestForExceptions {
 	@Test(expected = ExtraArgumentException.class)
 	public void throwsExtraArgumentException() throws MissingArgumentException, FilePathException, StartDateException,
 			DurationException, ThresholdException, ExtraArgumentException {
-		// --accesslog=/Users/kemalturgul/Desktop/Java_MySQL_Test/testData.txt
-		// --startDate=2017-01-01.15:00:00 --duration=hourly --threshold=200
 		String[] inputs = { "--accesslog=/path", "--startDate=2017-01-01.15:00:00", "--duration=hourly",
 				"--threshold=200", "--extraparam=" };
 		ParseInputParameters parseInputParameters = new ParseInputParameters();
@@ -97,7 +95,8 @@ public class ParserTestForExceptions {
 			DurationException, ThresholdException, ExtraArgumentException {
 		ParseInputParameters parseInputParameters = new ParseInputParameters();
 		try {
-			parseInputParameters.parseInputParams("--startDate=2017-01-01.15:00:00", "--duration=hourly", "--threshold");
+			parseInputParameters.parseInputParams("--startDate=2017-01-01.15:00:00", "--duration=hourly",
+					"--threshold");
 			fail("ThresholdException was not thrown for empty param value!!");
 		} catch (ThresholdException e) {
 			assertEquals("Exception message did not match!!",
@@ -113,7 +112,7 @@ public class ParserTestForExceptions {
 					Constants.getInvalidParamValueExceptionMessage(Constants.INPUT_PARAMETER_THRESHOLD_TXT),
 					e.getMessage());
 		}
-		
+
 		try {
 			parseInputParameters.parseInputParams("--startDate=2017-01-01.15:00:00", "--duration=hourly",
 					"--threshold=abc");
