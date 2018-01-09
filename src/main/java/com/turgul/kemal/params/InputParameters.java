@@ -1,11 +1,15 @@
 package com.turgul.kemal.params;
 
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.Date;
 
+import com.turgul.kemal.Constants;
 import com.turgul.kemal.enums.Duration;
 
 /**
+ * This class saves parsed input parameters
+ * 
  * @author kemalturgul
  * @date Jan 6, 2018
  */
@@ -20,6 +24,19 @@ public class InputParameters {
 	public InputParameters() {
 	}
 
+	/**
+	 * 
+	 * @param pathToLogFile
+	 *            a file path to load CSV file and parse it
+	 * @param startDate
+	 *            server access date-time of the client
+	 * @param duration
+	 *            server access time interval to add @startDate, it can be DAILY or
+	 *            HOURLY
+	 * @param threshold
+	 *            minimum access count number of an IP address in the interval of
+	 *            the startDate and duration
+	 */
 	public InputParameters(File pathToLogFile, Date startDate, Duration duration, int threshold) {
 		this(startDate, duration, threshold);
 		this.pathToLogFile = pathToLogFile;
@@ -72,15 +89,7 @@ public class InputParameters {
 	}
 
 	public String getBlockingComment() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Since number of requests exceeded threshold=");
-		builder.append(threshold);
-		builder.append(" value in duration of the ");
-		builder.append(duration.getDurationTxt());
-		builder.append(" starting at ");
-		builder.append(startDate);
-
-		return builder.toString();
+		return MessageFormat.format(Constants.BLOCKING_COMMENT, threshold, duration.getDurationTxt(), startDate);
 	}
 
 	@Override

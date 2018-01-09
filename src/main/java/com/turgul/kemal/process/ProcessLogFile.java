@@ -71,7 +71,7 @@ public class ProcessLogFile {
 				String statusString = accessData[3];
 				String userAgent = accessData[4];
 
-				dateString = dateString.substring(0, dateString.indexOf("."));
+				dateString = dateString.substring(0, dateString.indexOf(Constants.DOT));
 				Date serverAccessTime = DateUtil.getFormattedDate(dateString, Constants.MY_SQL_TIMESTAMP_DATE_FORMAT);
 //				Date serverAccessTime = DateUtil.getFormattedDate(dateString, Constants.ACCESS_LOG_FILE_DATE_FORMAT);
 				Integer status = new Integer(statusString);

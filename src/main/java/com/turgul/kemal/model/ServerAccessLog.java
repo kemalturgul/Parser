@@ -39,11 +39,6 @@ public class ServerAccessLog {
 	@Column(name = "user_agent", length = 250)
 	private String userAgent;
 
-	// @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy =
-	// "serverAccessLog")
-	// Set<ServerAccessBlockingReport> serverAccessBlockingReportList = new
-	// HashSet<>();
-
 	public ServerAccessLog() {
 	}
 

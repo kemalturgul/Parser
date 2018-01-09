@@ -17,6 +17,13 @@ public enum Duration {
 		return durationTxt;
 	}
 
+	/**
+	 * Search given string in defined enumeration
+	 * 
+	 * @param durationString
+	 *            a string value to check in Duration enumeration
+	 * @return Duration enum or null if not found
+	 */
 	public static Duration getDuration(String durationString) {
 		for (Duration value : Duration.values()) {
 			if (value.getDurationTxt().equals(durationString)) {

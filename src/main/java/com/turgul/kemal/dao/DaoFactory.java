@@ -35,6 +35,16 @@ public class DaoFactory {
 		return f;
 	}
 
+	/**
+	 * Creates a new instance of the class represented by RootDao object
+	 * 
+	 * @param clazz
+	 *            RootDao class or its subclasses
+	 * @return a newly allocated instance of RootDao
+	 * 
+	 * @throws RuntimeException
+	 *             if any Exception occurs
+	 */
 	private RootDao instantiateDao(Class<? extends RootDao> clazz) {
 		RootDao dao;
 		try {
@@ -47,18 +57,20 @@ public class DaoFactory {
 		}
 	}
 
+	/**
+	 * Close entityManager if it is not null and open
+	 */
 	public void closeContext() {
 		if (em != null && em.isOpen()) {
 			em.close();
 		}
 	}
 
-	public void closeEntityManager() {
-		if (emf != null && emf.isOpen()) {
-			emf.close();
-		}
-	}
-
+	/**
+	 * Creates a new instance of RootDao class if defined instance is null
+	 * 
+	 * @return RootDao instance
+	 */
 	public RootDao getRootDao() {
 		if (rootDao == null) {
 			rootDao = instantiateDao(ROOT_DAO);
@@ -66,6 +78,12 @@ public class DaoFactory {
 		return rootDao;
 	}
 
+	/**
+	 * Creates a new instance of ServerAccessLogDao class if defined instance is
+	 * null
+	 * 
+	 * @return ServerAccessLogDao instance
+	 */
 	public ServerAccessLogDao getServerAccessLogDao() {
 		if (serverAccessLogDao == null) {
 			serverAccessLogDao = (ServerAccessLogDao) instantiateDao(SERVER_ACCCESS_LOG_DAO);
@@ -73,6 +91,12 @@ public class DaoFactory {
 		return serverAccessLogDao;
 	}
 
+	/**
+	 * Creates a new instance of ServerAccessBlockedDao class if defined instance is
+	 * null
+	 * 
+	 * @return ServerAccessBlockedDao instance
+	 */
 	public ServerAccessBlockedDao getServerAccessBlockedDao() {
 		if (serverAccessBlockedDao == null) {
 			serverAccessBlockedDao = (ServerAccessBlockedDao) instantiateDao(SERVER_ACCCESS_BLOCKED_DAO);

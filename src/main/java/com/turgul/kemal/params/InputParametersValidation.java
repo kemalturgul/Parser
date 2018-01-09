@@ -13,10 +13,13 @@ import com.turgul.kemal.exceptions.ThresholdException;
 import com.turgul.kemal.util.DateUtil;
 
 /**
+ * This class validate input parameters and throws defined Exception in case
+ * 
  * @author kemalturgul
  * @date Jan 6, 2018
  */
 public class InputParametersValidation {
+
 	private InputParameters inputParameters;
 
 	public InputParametersValidation() {
@@ -27,6 +30,12 @@ public class InputParametersValidation {
 		this.inputParameters = inputParameters;
 	}
 
+	/**
+	 * @param filePath
+	 *            file path to parse data
+	 * @throws FilePathException
+	 *             if null, empty or invalid file path entered
+	 */
 	public void validatePathToFile(String filePath) throws FilePathException {
 		if (filePath == null || filePath.trim().length() == 0) {
 			throw new FilePathException(
@@ -41,6 +50,13 @@ public class InputParametersValidation {
 		inputParameters.setPathToLogFile(file);
 	}
 
+	/**
+	 * 
+	 * @param startDate
+	 *            server access date-time of the client
+	 * @throws StartDateException
+	 *             if null, empty or invalid date entered
+	 */
 	public void validateStartDate(String startDate) throws StartDateException {
 		if (startDate == null || startDate.trim().length() == 0) {
 			throw new StartDateException(
@@ -50,13 +66,13 @@ public class InputParametersValidation {
 		Date parsedStartDate;
 		try {
 			parsedStartDate = DateUtil.getFormattedDate(startDate, Constants.INPUT_PARAMETER_START_DATE_FORMAT);
-			
+
 			if (parsedStartDate == null) {
 				throw new StartDateException(
 						Constants.getInvalidParamValueExceptionMessage(Constants.INPUT_PARAMETER_START_DATE_TXT));
 			}
 			inputParameters.setStartDate(parsedStartDate);
-			
+
 		} catch (ParseException e) {
 			throw new StartDateException(
 					Constants.getInvalidParamValueExceptionMessage(Constants.INPUT_PARAMETER_START_DATE_TXT));
@@ -64,6 +80,14 @@ public class InputParametersValidation {
 
 	}
 
+	/**
+	 * 
+	 * @param durationString
+	 *            server access time interval to add @startDate when searching, it
+	 *            can be only 'hourly' or 'daily'
+	 * @throws DurationException
+	 *             if null, empty or invalid duration entered
+	 */
 	public void validateDuration(String durationString) throws DurationException {
 		if (durationString == null || durationString.trim().length() == 0) {
 			throw new DurationException(
@@ -77,6 +101,14 @@ public class InputParametersValidation {
 		inputParameters.setDuration(duration);
 	}
 
+	/**
+	 * 
+	 * @param threshold
+	 *            minimum access count number of an IP address in the interval of
+	 *            the startDate and duration
+	 * @throws ThresholdException
+	 *             if null, empty or non-integer value entered
+	 */
 	public void validateThreshold(String threshold) throws ThresholdException {
 		if (threshold == null || threshold.trim().length() == 0) {
 			throw new ThresholdException(

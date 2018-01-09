@@ -25,6 +25,18 @@ public class ParseInputParameters {
 		inputParametersValidation = new InputParametersValidation();
 	}
 
+	/**
+	 * 
+	 * @param inputs
+	 *            command arguments
+	 * @return InputParameters class instance
+	 * @throws MissingArgumentException
+	 * @throws FilePathException
+	 * @throws StartDateException
+	 * @throws DurationException
+	 * @throws ThresholdException
+	 * @throws ExtraArgumentException
+	 */
 	public InputParameters parseInputParams(String... inputs) throws MissingArgumentException, FilePathException,
 			StartDateException, DurationException, ThresholdException, ExtraArgumentException {
 
@@ -42,13 +54,15 @@ public class ParseInputParameters {
 			checkInputParametersNames(false);
 
 			parseSearchParameters();
-			
+
 		} else if (inputs.length > 4) {
 			throw new ExtraArgumentException("Extra arguments entered, please check usage!!");
 		} else {
 			throw new MissingArgumentException("Missing arguments, please check usage!!");
 		}
+
 		System.out.println("parsed input arguments:" + inputParametersValidation.getInputParameters());
+
 		return inputParametersValidation.getInputParameters();
 	}
 

@@ -1,37 +1,29 @@
 package com.turgul.kemal.main;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Date;
 
-import com.turgul.kemal.Constants;
 import com.turgul.kemal.exceptions.DurationException;
 import com.turgul.kemal.exceptions.ExtraArgumentException;
 import com.turgul.kemal.exceptions.FilePathException;
 import com.turgul.kemal.exceptions.MissingArgumentException;
 import com.turgul.kemal.exceptions.StartDateException;
 import com.turgul.kemal.exceptions.ThresholdException;
-import com.turgul.kemal.model.ServerAccessLog;
 import com.turgul.kemal.params.InputParameters;
 import com.turgul.kemal.params.ParseInputParameters;
 import com.turgul.kemal.process.ProcessLogFile;
 import com.turgul.kemal.search.SearchServerAccessLog;
-import com.turgul.kemal.util.DateUtil;
 
 /**
  * @author kemalturgul
  * @date Jan 5, 2018
  */
 public class Parser {
-	// private static Logger logger = LogManager.getLogger(Parser.class);
-
 	public Parser() {
 
 	}
 
 	public static void main(String[] args) {
-		// logger.info("****************************Parser Started******************");
 		System.out.println("****************************Parser Started******************");
 
 		ParseInputParameters parseInputParameters = new ParseInputParameters();
@@ -46,6 +38,7 @@ public class Parser {
 
 			SearchServerAccessLog searchServerAccessLog = new SearchServerAccessLog(inputParameters);
 			searchServerAccessLog.searchFromTable();
+			
 		} catch (ExtraArgumentException e) {
 			System.out.println(e.getMessage());
 		} catch (MissingArgumentException e) {
