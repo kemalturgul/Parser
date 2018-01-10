@@ -25,7 +25,7 @@ public class Parser {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("****************************Parser Started******************");
+		System.out.println(Constants.START_MESSAGE);
 
 		ParseInputParameters parseInputParameters = new ParseInputParameters();
 		InputParameters inputParameters = null;

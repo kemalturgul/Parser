@@ -43,11 +43,21 @@
 			<artifactId>jaxb-api</artifactId>
 			<version>2.2.6</version>
 		</dependency>
+
+<!-- EclipseLink JPA Provider Dependency -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.2.12.Final</version>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.jpa</artifactId>
+			<version>2.7.1</version>
 		</dependency>
+		
+<!-- Hibernate JPA Provider Dependency -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.hibernate</groupId> -->
+<!-- 			<artifactId>hibernate-entitymanager</artifactId> -->
+<!-- 			<version>5.2.12.Final</version> -->
+<!-- 		</dependency> -->
+		
 	</dependencies>
 
 	<build>
@@ -146,5 +156,13 @@
 			</resource>
 		</resources>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>oss.sonatype.org</id>
+			<name>OSS Sonatype Staging</name>
+			<url>https://oss.sonatype.org/content/groups/staging</url>
+		</repository>
+	</repositories>
 
 </project>

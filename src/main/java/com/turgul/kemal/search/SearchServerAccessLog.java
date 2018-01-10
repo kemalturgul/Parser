@@ -3,6 +3,7 @@ package com.turgul.kemal.search;
 import java.util.Date;
 import java.util.List;
 
+import com.turgul.kemal.Constants;
 import com.turgul.kemal.dao.DaoFactory;
 import com.turgul.kemal.dao.ServerAccessBlockedDao;
 import com.turgul.kemal.dao.ServerAccessLogDao;
@@ -34,7 +35,8 @@ public class SearchServerAccessLog {
 
 			List<Object[]> searchResultList = serverAccessLogDao.searchByDateAndThreshold(
 					inputParameters.getStartDate(), inputParameters.getEndDate(), inputParameters.getThreshold());
-
+			
+			System.out.println(Constants.SEARCH_RESULTS_MESSAGE);
 			if (searchResultList != null && !searchResultList.isEmpty()) {
 				addToBlockedTable(searchResultList);
 				printToConsole(searchResultList);
@@ -68,7 +70,6 @@ public class SearchServerAccessLog {
 	}
 
 	private void printToConsole(List<Object[]> serverAccessData) {
-		System.out.println("----------------SEARCH RESULTS------------------");
 		for (Object[] accessData : serverAccessData) {
 			System.out.println(String.format("IpAddress:%s accessCount:%s", accessData[0], accessData[1]));
 		}

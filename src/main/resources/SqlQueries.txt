@@ -1,0 +1,18 @@
+(1) Write MySQL query to find IPs that made more than a certain number of requests for a given time period.
+
+	QUERY:
+		 SELECT IP, COUNT(ID) FROM server_access_log WHERE server_access_time BETWEEN ? AND ? GROUP BY IP HAVING COUNT(ID) > ?
+		
+    Ex: Write SQL to find IPs that made more than 100 requests starting from 2017-01-01.13:00:00 to 2017-01-01.14:00:00.
+		SELECT IP, COUNT(ID) FROM server_access_log  
+									WHERE server_access_time BETWEEN '2017-01-01 13:00:00' AND '2017-01-01 14:00:00'
+									GROUP BY IP 
+									HAVING COUNT(ID) > 100
+								
+(2) Write MySQL query to find requests made by a given IP.
+	QUERY:
+		select * from server_access_log where ip=? order by serverAccessTime desc;	
+		
+	Ex: Write MySQL query to find requests made by 192.168.169.194 IP Address.
+		select * from server_access_log where ip='192.168.169.194' order by server_access_time desc;	
+
