@@ -1,5 +1,4 @@
 # Parser Project
-----------------
 This is a CSV file parser project written with Java Program.
 If log file provided, firstly do parsing the file (loading to DB) and then search by given parameters.
 After log file parsed different searches can be done...
@@ -7,7 +6,6 @@ After log file parsed different searches can be done...
 To run jar file on command line, check usage below:
 
 # USAGE:
--------
 <pre>
 $ java -jar parser-jar-with-dependencies.jar com.turgul.kemal.main.Parser [--accesslog={pathToLogFile}] --startDate={dateTime} --duration=(hourly | daily) --threshold={number}
 </pre>
@@ -34,7 +32,6 @@ $ java -jar parser-jar-with-dependencies.jar --startDate=2017-02-01.16:05:00 --d
 	
 	
 # LOG File Format
----------------
 Date, IP, Request, Status, User Agent (pipe delimited, open the example file in text editor)
 
 Date Format: "yyyy-MM-dd HH:mm:ss.SSS"
